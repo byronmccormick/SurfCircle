@@ -28,8 +28,8 @@ export default function Signup() {
       const data = await res.json();
       if(data.success === false){
         return setErrorMessage(data.message);
+        setLoading(false);
       }
-      setLoading(false);
       if(res.ok){
         navigate('/sign-in');
       }
@@ -47,7 +47,7 @@ export default function Signup() {
             Blog
           </Link>
           <p className='text-sm mt-5'>
-            Welcome to my demo project! I built this to showcase my skills using the MERN stack. Sign up and take a look around.
+            Welcome! I built this to showcase my skills using the MERN stack. Sign up and take a look around.
           </p>
         </div>
         <div className='flex-1'>
