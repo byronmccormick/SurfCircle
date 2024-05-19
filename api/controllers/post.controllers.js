@@ -6,7 +6,7 @@ export const create = async (req,res,next)=>{
     if(!req.user.isAdmin){
         return next(errorHandler(403, 'You are not allowed to create a post'))
     }
-    if(!req.body.title || !req.body.content){
+    if(!req.body.title || !req.body.content || !req.body.break || !req.body.reportedSwell || !req.body.actualSwell || !req.body.swellDirection || !req.body.reportedWind || !req.body.actualWind || !req.body.duration || !req.body.forecast){
         return next(errorHandler(403, 'Please provide all required fields'))
     }
     const slug = req.body.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
@@ -32,7 +32,7 @@ export const getPosts = async (req,res,next) => {
         const sortDirection = req.query.order === 'asc' ? 1 : -1;
         const posts = await Post.find({
             ...(req.query.userId && {userId: req.query.userId}),
-            ...(req.query.category && {category: req.query.category}),
+            ...(req.query.region && {region: req.query.region}),
             ...(req.query.slug && {slug: req.query.slug}),
             ...(req.query.postId && {_id: req.query.postId}),
             ...(req.query.searchTerm && {
