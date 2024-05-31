@@ -1,4 +1,5 @@
 import Comment from '../models/comment.model.js'
+import Post from '../models/post.model.js'
 import { errorHandler } from '../utils/error.js';
 
 export const createComment = async (req,res,next)=>{
@@ -80,12 +81,38 @@ export const deleteComment = async (req,res,next) => {
         if(!comment){
             return next(errorHandler(404,'Comment not found'));
         }
-        if(comment.userId !== req.user.id){
-            return next(errorHandler(403,'You are not allowed to delete this comment'));
-        }
         await Comment.findByIdAndDelete(req.params.commentId);
         res.status(200).json('Comment has been deleted');
     } catch (error) {
         next(error)
+    }
+}
+
+export const getComments = async (req,res,next)=> {
+    if(!req.user.isAdmin){
+        return next(errorHandler(403, 'You are not allowed to get all comments'))
+    }
+    try {
+        const { userId } = req.query;
+        const startIndex = parseInt(req.query.startIndex) || 0;
+        const limit = parseInt(req.query.limit) || 9;
+        const sortDirection = req.query.sort==='desc' ? -1:1;
+        const filter = userId ? { userId } : {};
+         // Find all posts created by the user
+        const userPosts = await Post.find({...(req.query.userId && {userId: req.query.userId}) }).select('_id');
+        const postIds = userPosts.map(post => post._id);
+        // Find comments on those posts
+        const comments = await Comment.find({ postId: { $in: postIds } })
+            .sort({ createdAt: sortDirection })
+            .skip(startIndex)
+            .limit(limit);
+        const totalComments = await Comment.countDocuments({ postId: { $in: postIds } });
+        const now = new Date();
+        const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+        const lastMonthsComments = await Comment.countDocuments({ postId: { $in: postIds }, createdAt: { $gte: oneMonthAgo } });
+        //
+        res.status(200).json({comments, totalComments, lastMonthsComments})
+    } catch (error) {
+        next(error);
     }
 }
