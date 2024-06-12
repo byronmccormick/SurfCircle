@@ -15,7 +15,6 @@ export default function DashComments() {
       try {
         const res = await fetch(`/api/comment/getcomments?userId=${currentUser._id}`);
         const data = await res.json();
-        console.log(data)
         if (res.ok) {
           setComments(data.comments);
           if (data.comments.length < 9) {
@@ -81,8 +80,7 @@ export default function DashComments() {
               <Table.HeadCell>Date updated</Table.HeadCell>
               <Table.HeadCell>Comment content</Table.HeadCell>
               <Table.HeadCell>Number of likes</Table.HeadCell>
-              <Table.HeadCell>LogId</Table.HeadCell>
-              <Table.HeadCell>UserId</Table.HeadCell>
+              <Table.HeadCell>Username</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
             </Table.Head>
             {comments.map((comment) => ( 
@@ -93,8 +91,7 @@ export default function DashComments() {
                   </Table.Cell>
                   <Table.Cell>{comment.content}</Table.Cell>
                   <Table.Cell>{comment.numberOfLikes}</Table.Cell>
-                  <Table.Cell>{comment.postId}</Table.Cell>
-                  <Table.Cell>{comment.userId}</Table.Cell>
+                  <Table.Cell>{comment.userName}</Table.Cell>
                   <Table.Cell>
                     <span
                       onClick={() => {

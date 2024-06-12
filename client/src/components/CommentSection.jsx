@@ -24,7 +24,7 @@ export default function CommentSection({postId}) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({content: comment, postId, userId: currentUser._id}),
+                body: JSON.stringify({content: comment, postId, userId: currentUser._id, userName: currentUser.username}),
             });
             const data = await res.json();
             if(res.ok){

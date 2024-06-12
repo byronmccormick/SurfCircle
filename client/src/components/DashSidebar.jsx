@@ -1,6 +1,6 @@
 import React from 'react'
 import {Sidebar, SidebarItems} from 'flowbite-react'
-import {HiUser,HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation} from 'react-icons/hi'
+import {HiUser,HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, HiChartPie} from 'react-icons/hi'
 import {Link, useLocation} from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
@@ -39,6 +39,11 @@ export default function DashSidebar() {
     <Sidebar className='w-full md:w-56'>
         <SidebarItems>
             <Sidebar.ItemGroup className='flex flex-col ga-1'>
+                <Link to='/dashboard?tab=dash'>
+                    <Sidebar.Item active={tab==='dash' || !tab} icon={HiChartPie} as='div'>
+                        Dashboard
+                    </Sidebar.Item>
+                </Link>
                 <Link to='/dashboard?tab=profile'>
                     <Sidebar.Item active={tab==='profile'} icon={HiUser} label={currentUser.isAdmin ? "Admin" : "User"} labelColor="dark" as='div'>
                         Profile
@@ -48,7 +53,7 @@ export default function DashSidebar() {
                     <>
                         <Link to='/dashboard?tab=posts'>
                             <Sidebar.Item active={tab==='posts'} icon={HiDocumentText} as='div'>
-                                Logs
+                                Posts
                             </Sidebar.Item>
                         </Link>
                         <Link to='/dashboard?tab=comments'>
@@ -58,7 +63,7 @@ export default function DashSidebar() {
                         </Link>
                     </>
                 )}
-                {currentUser.isAdmin && currentUser.username==='admin' &&(
+                {currentUser.isAdmin && (
                     <Link to='/dashboard?tab=users'>
                         <Sidebar.Item active={tab==='users'} icon={HiOutlineUserGroup} as='div'>
                             Users

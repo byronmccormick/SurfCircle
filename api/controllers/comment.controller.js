@@ -4,7 +4,7 @@ import { errorHandler } from '../utils/error.js';
 
 export const createComment = async (req,res,next)=>{
     try {
-        const {content,postId,userId}=req.body;
+        const {content,postId,userId,userName}=req.body;
 
         if(userId !== req.user.id){
             return next(403, 'You are not allowed to create a comment')
@@ -13,6 +13,7 @@ export const createComment = async (req,res,next)=>{
             content,
             postId,
             userId,
+            userName,
         });
         await newComment.save();
 
