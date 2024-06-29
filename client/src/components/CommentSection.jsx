@@ -115,11 +115,11 @@ export default function CommentSection({postId}) {
                 <div className='flex items-center gap-1 my-5 text-gray-500 text-sm'>
                     <p>Signed in as: </p>
                     <img className='h-5 w-5 object-cover rounded-full' src={currentUser.profilePicture} alt=""></img>
-                    <Link className='text-xs text-cyan-600 hover:underline' to={'/dashboard?tab=profile'}>@{currentUser.username}</Link>
+                    <Link className='text-xs text-emerald-600 hover:underline' to={'/dashboard?tab=profile'}>@{currentUser.username}</Link>
                 </div>    
             ):
             (
-                <div className='text-sm tect-emerald-600 my-5 flex gap-1'>You must be signed in to comment.<Link className='text-blue-500 hover:underline' to={'/sign-in'}>Sign In</Link></div>
+                <div className='text-sm text-emerald-600 my-5 flex gap-1'>You must be signed in to comment.<Link className='text-blue-500 hover:underline' to={'/sign-in'}>Sign In</Link></div>
             )}
             {currentUser && (
                <form onSubmit={handleSubmit} className='border border-emerald-600 rounded-md p-3'>
