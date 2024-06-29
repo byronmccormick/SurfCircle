@@ -4,26 +4,30 @@ import { Link } from 'react-router-dom'
 
 export default function FooterCom() {
   return (
-    <Footer container className='border border-t-8 border-teal-500'>
+    <Footer container className='border border-t-8 border-emerald-600'>
         <div className='w-full max-w-7xl mx-auto'>
             <div className='grid w-full justify-between sm:flex md:grid-cols-1'>
                 <div className='mt-5'>
                     <Link to='/' className='self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:white'>
-                        <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Byron's</span>
-                        Blog
+                        SurfCirlce
                     </Link>
                 </div>
                 <div className='grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6'>
                     <div>
-                        <Footer.Title title='About'/>
+                        <Footer.Title title='Forecasts'/>
                         <Footer.LinkGroup col>
-                            <Footer.Link href='https://byronmccormick.netlify.app/' target='_blank' rel='noopener noreferrer'>
-                                Portfolio
+                            <Footer.Link href='https://www.goodsurfnow.co.nz/' target='_blank' rel='noopener noreferrer'>
+                                GOODSURFNOW
                             </Footer.Link>
                         </Footer.LinkGroup>
                         <Footer.LinkGroup col>
-                            <Footer.Link href='/about' rel='noopener noreferrer'>
-                                My Blog
+                            <Footer.Link href='https://www.surfline.com/' rel='noopener noreferrer'>
+                                Surfline
+                            </Footer.Link>
+                        </Footer.LinkGroup>
+                        <Footer.LinkGroup col>
+                            <Footer.Link href='https://www.surf-forecast.com/' rel='noopener noreferrer'>
+                                surfforecast.com
                             </Footer.Link>
                         </Footer.LinkGroup>
                     </div>
@@ -62,7 +66,7 @@ export default function FooterCom() {
             </div>
             <FooterDivider/>
             <div>
-                <Footer.Copyright href='#' by="Byron's Blog" year={new Date().getFullYear()}/>
+                <Footer.Copyright href='#' by="SurfCirlce" year={new Date().getFullYear()}/>
             </div>
         </div>
     </Footer>

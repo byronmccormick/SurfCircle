@@ -111,9 +111,9 @@ export default function UpdatePost() {
                     <option value="reactjs">React.js</option>
                 </Select>
             </div>
-            <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
+            <div className="flex gap-4 items-center justify-between border-4 border-emerald-600 border-dotted p-3">
                 <FileInput type='file' accept='image/*' onChange={(e)=>setFile(e.target.files[0])}></FileInput>
-                <Button type='button' gradientDuoTone='purpleToBlue' size='sm' outline onClick={handleUploadImage} disabled={imageUploadProgress}>
+                <Button type='button' gradientDuoTone='cyanToBlue' size='sm' outline onClick={handleUploadImage} disabled={imageUploadProgress}>
                     {
                         imageUploadProgress ? (
                             <div className="w-16 h-16">
@@ -128,7 +128,7 @@ export default function UpdatePost() {
             {imageUploadError && (<Alert color='failure'>{imageUploadError}</Alert>)}
             {formData.image && (<img src={formData.image} alt='upload' className='w-full h-72 object-cover'></img>)}
             <ReactQuill value={formData.content} theme='snow' className="h-72 mb-12" placeholder="Write something..." required onChange={(value)=> {setFormData({...formData,content: value})}}></ReactQuill>
-            <Button type='submit' gradientDuoTone='purpleToPink'>Update post</Button>
+            <Button type='submit' gradientDuoTone='cyanToBlue'>Update post</Button>
             {
                 publishError && <Alert className="mt-5" color='failure'>{publishError}</Alert>
             }

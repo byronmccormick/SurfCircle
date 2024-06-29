@@ -101,12 +101,12 @@ export default function DashUsers() {
                     </Table>
                     {
                         showMore && (
-                            <button onClick={handleShowMore} className='w-full text-teal-500 self-center text-sm py-7'>Show more</button>
+                            <button onClick={handleShowMore} className='w-full text-emerald-600 self-center text-sm py-7'>Show more</button>
                         )
                     }
                 </>
             ): (
-                <p>You have no users yet</p>
+                <p>Loading...</p>
             )}
         <Modal show={showModal} onClose={()=> setShowModal(false)} popup size='md'>
             <Modal.Header></Modal.Header>

@@ -68,8 +68,8 @@ export default function Comment({comment, onLike, onEdit, onDelete}) {
                         onChange={(e)=> setEditedContent(e.target.value)}
                     />
                     <div className="flex justify-end gap-2 text-xs">
-                        <Button onClick={handleSave} type='button' size='sm' gradientDuoTone='purpleToBlue'>Save</Button>
-                        <Button onClick={()=>setIsEditing(false)} type='button' size='sm' outline gradientDuoTone='purpleToBlue'>Cancel</Button>
+                        <Button onClick={handleSave} type='button' size='sm' gradientDuoTone='cyanToBlue'>Save</Button>
+                        <Button onClick={()=>setIsEditing(false)} type='button' size='sm' outline gradientDuoTone='cyanToBlue'>Cancel</Button>
                     </div>
                 </>
                 

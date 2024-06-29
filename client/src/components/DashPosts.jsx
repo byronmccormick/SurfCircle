@@ -94,7 +94,7 @@ export default function DashPosts() {
                                         </span>
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <Link className='text-teal-500 hover:underline cursor-pointer' to={`/update-post/${post._id}`}><span>Edit</span></Link>
+                                        <Link className='text-emerald-600 hover:underline cursor-pointer' to={`/update-post/${post._id}`}><span>Edit</span></Link>
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body>
@@ -102,7 +102,7 @@ export default function DashPosts() {
                     </Table>
                     {
                         showMore && (
-                            <button onClick={handleShowMore} className='w-full text-teal-500 self-center text-sm py-7'>Show more</button>
+                            <button onClick={handleShowMore} className='w-full text-emerald-600 self-center text-sm py-7'>Show more</button>
                         )
                     }
                 </>

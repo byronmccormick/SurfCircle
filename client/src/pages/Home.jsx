@@ -19,7 +19,7 @@ export default function Home() {
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
         <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to SurfCircle!</h1>
         <p className='text-gray-500 text-xs sm:text-sm'>Join our vibrant surf community and share your stoke for waves. Whether you’re logging your surf sessions, comparing the latest forecasts, or reading about fellow surfers' adventures, SurfCircle is your go-to platform. Dive in and connect with surfers worldwide. It’s up to you how you ride the wave with us!</p>
-        <Link to='/search' className='text-xs sm:text-sm text-teal-500 font-bold hover:underline'>Check it out</Link>
+        <Link to='/search' className='text-xs sm:text-sm text-emerald-600 font-bold hover:underline'>Check it out</Link>
       </div>
       <div className='p-3 bg-gray-300 dark:bg-slate-700'>
         <CallToAction></CallToAction>
@@ -34,7 +34,7 @@ export default function Home() {
                   <PostCard key={post._id} post={post}/>
                 ))}
               </div>
-              <Link to='/search' className='text-lg text-teal-500 text-center hover:underline'>View all posts</Link>
+              <Link to='/search' className='text-lg text-emerald-600 text-center hover:underline'>View all posts</Link>
             </div>
           )
         }

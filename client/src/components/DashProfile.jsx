@@ -170,7 +170,7 @@ export default function DashProfile() {
             <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username} onChange={handleChange}/>
             <TextInput type='text' id='email' placeholder='email' defaultValue={currentUser.email} onChange={handleChange}/>
             <TextInput type='password' id='password' placeholder='password' onChange={handleChange}/>
-            <Button type='submit' gradientDuoTone='purpleToBlue' outline disabled={loading || imageFileUploading}>
+            <Button type='submit' gradientDuoTone='greenToBlue' outline disabled={loading || imageFileUploading}>
                 {loading ? 'Loading...' : 'Update'}
             </Button>
             {
@@ -178,7 +178,7 @@ export default function DashProfile() {
                     <Link to={'/create-post'}>
                     <Button 
                     type='button'
-                    gradientDuoTone='purpleToPink'
+                    gradientDuoTone='cyanToBlue'
                     className='w-full'
                     >
                     Create a post

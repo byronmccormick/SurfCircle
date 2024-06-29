@@ -49,10 +49,13 @@ export default function Header() {
   }
   return (
     <Navbar className='border-b-2'>
-        <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:white'>
-          <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Byron's</span>
-          Blog
+
+      <Navbar.Brand>
+        <Link to='/' className='flex'>
+          <img src="images/logo.png" className="mr-2 h-10 sm:h-12" alt="SurfCircle React Logo" />
+          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white ">SurfCircle</span>
         </Link>
+      </Navbar.Brand>
       <form onSubmit={handleSubmit}>
         <TextInput onChange={(e)=>setSearchTerm(e.target.value)} value={searchTerm} type='text' placeholder='Search' rightIcon={AiOutlineSearch} className='hidden lg:inline'/>
       </form>  
@@ -93,7 +96,7 @@ export default function Header() {
         ):
         (
           <Link to='/sign-in'>
-            <Button outline gradientDuoTone='purpleToBlue'>Sign In</Button>
+            <Button outline gradientDuoTone='cyanToBlue'>Sign In</Button>
           </Link>
         )
         }

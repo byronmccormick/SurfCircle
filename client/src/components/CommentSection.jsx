@@ -119,14 +119,14 @@ export default function CommentSection({postId}) {
                 </div>    
             ):
             (
-                <div className='text-sm tect-teal-500 my-5 flex gap-1'>You must be signed in to comment.<Link className='text-blue-500 hover:underline' to={'/sign-in'}>Sign In</Link></div>
+                <div className='text-sm tect-emerald-600 my-5 flex gap-1'>You must be signed in to comment.<Link className='text-blue-500 hover:underline' to={'/sign-in'}>Sign In</Link></div>
             )}
             {currentUser && (
-               <form onSubmit={handleSubmit} className='border border-teal-500 rounded-md p-3'>
+               <form onSubmit={handleSubmit} className='border border-emerald-600 rounded-md p-3'>
                 <Textarea onChange={(e)=> setComment(e.target.value)} value={comment} rows='3' maxLength='200' placeholder='Add a comment'></Textarea>
                 <div className='flex justify-between items-center mt-5'>
                     <p className='text-gray-500 text-xs'>{200-comment.length} characters remaining</p>
-                    <Button outline gradientDuoTone='purpleToBlue' type='submit'>Submit</Button>
+                    <Button outline gradientDuoTone='cyanToBlue' type='submit'>Submit</Button>
                 </div>
                 {commentError && 
                     <Alert color='failure' className='mt-5'>

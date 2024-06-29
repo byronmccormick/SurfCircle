@@ -44,11 +44,10 @@ export default function Signup() {
       <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
         <div className='flex-1'>
           <Link to='/' className='font-bold dark:white text-4xl'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>Byrons</span>
-            Blog
+            SurfCircle
           </Link>
           <p className='text-sm mt-5'>
-            Welcome! I built this to showcase my skills using the MERN stack. Sign up and take a look around.
+            Welcome! Sign up and start logging your surf sessions. 
           </p>
         </div>
         <div className='flex-1'>
@@ -65,7 +64,7 @@ export default function Signup() {
               <Label value='Your password'/>
               <TextInput type='password' placeholder='Password' id='password' onChange={handleChange}/>
             </div>
-            <Button type='submit' gradientDuoTone='purpleToPink' disabled={loading}>
+            <Button type='submit' gradientDuoTone='greenToBlue' disabled={loading}>
               {
                 loading ? (
                   <>
