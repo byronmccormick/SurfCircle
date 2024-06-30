@@ -1,0 +1,15 @@
+{
+    "short_name": "SurfCircle",
+    "name": "SurfCircle - Your Surfing Companion",
+    "icons": [
+      {
+        "src": "images/logo.png",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff"
+  }
+  
