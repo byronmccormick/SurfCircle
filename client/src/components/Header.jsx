@@ -49,17 +49,14 @@ export default function Header() {
   }
   return (
     <Navbar className='border-b-2'>
-
-      <Navbar.Brand>
-        <Link to='/' className='flex'>
-          <img src="images/logo.png" className="mr-2 h-10 sm:h-12" alt="SurfCircle React Logo" />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white ">SurfCircle</span>
-        </Link>
+      <Navbar.Brand as={Link} to="/">
+        <img src="images/logo.png" className="mr-2 h-10 sm:h-12" alt="SurfCircle Logo" />
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white ">SurfCircle</span>
       </Navbar.Brand>
       <form onSubmit={handleSubmit}>
         <TextInput onChange={(e)=>setSearchTerm(e.target.value)} value={searchTerm} type='text' placeholder='Search' rightIcon={AiOutlineSearch} className='hidden lg:inline'/>
       </form>  
-        <Button className='w-12 h-10 lg:hidden' color='gray' pill>
+        <Button as={Link} to="/search" className='w-12 h-10 lg:hidden' color='gray' pill>
           <AiOutlineSearch/>
         </Button>
       <div className='flex gap-2 md:order-2'>

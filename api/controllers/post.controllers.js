@@ -43,6 +43,8 @@ export const getPosts = async (req,res,next) => {
             }),
     }).sort({updatedAt: sortDirection}).skip(startIndex).limit(limit);      
 
+    const totalDuration = posts.reduce((sum, post) => sum + Number(post.duration), 0);
+
     const totalPosts = await Post.countDocuments({ userId: req.query.userId });
 
     const now = new Date();
@@ -53,6 +55,15 @@ export const getPosts = async (req,res,next) => {
         now.getDate()
     )
     
+    const lastMonthDuration = posts.reduce((sum, post) => {
+        const createdAtDate = new Date(post.createdAt);
+        if (createdAtDate.getTime() >= oneMonthAgo.getTime()) {
+            return sum + Number(post.duration);
+        } else {
+            return sum;
+        }
+    }, 0);
+
     const lastMonthPosts = await Post.countDocuments({
         createdAt: {$gte: oneMonthAgo},
         userId: req.query.userId,
@@ -62,6 +73,8 @@ export const getPosts = async (req,res,next) => {
         posts,
         totalPosts,
         lastMonthPosts,
+        totalDuration,
+        lastMonthDuration,
     });
 
     } catch (error) {

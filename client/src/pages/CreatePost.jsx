@@ -13,8 +13,8 @@ export default function CreatePost() {
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null);
     const [formData, setFormData] = useState({});
-    const [stokeLevel, setStokeLevel] = useState("Chillen");
-    const [surfRating, setSurfRating] = useState(5); 
+    const [stokeLevel, setStokeLevel] = useState("");
+    const [surfRating, setSurfRating] = useState(0); 
     const [publishError, setPublishError] = useState(null);
 
     const navigate = useNavigate();
@@ -86,25 +86,25 @@ export default function CreatePost() {
     };
 
     const updateStokeLevel = (rating) => {
-        if (rating == 0) {
-            setStokeLevel("Never surfing again");
-        }else if (rating >= 1 && rating < 3) {
-            setStokeLevel("Meh");
-        } else if (rating >= 3 && rating < 5) {
-            setStokeLevel("Meh+");
-        } else if (rating >= 5 && rating < 7) {
-            setStokeLevel("Chillen");
-        } else if (rating >= 7 && rating < 8) {
-            setStokeLevel("Stoked");
-        } else if (rating == 8) {
-            setStokeLevel("Stoked+");
-        } else if (rating > 9){
-            setStokeLevel("Epic");
+        if (rating >= 0 && rating <= 10) {
+          setStokeLevel("Never surfing again");
+        } else if (rating > 10 && rating < 30) {
+          setStokeLevel("Not impressed");
+        } else if (rating >= 30 && rating < 50) {
+          setStokeLevel("It's alright");
+        } else if (rating >= 50 && rating < 70) {
+          setStokeLevel("Pretty good");
+        } else if (rating >= 70 && rating < 80) {
+          setStokeLevel("Feeling great");
+        } else if (rating >= 80 && rating < 90) {
+          setStokeLevel("Super stoked");
+        } else if (rating >= 90 && rating <= 100) {
+          setStokeLevel("Epic!");
         }
-    };
+      };      
   return (
     <div className="p-3 max-w-6xl mx-auto min-h-screen">
-        <h1 className="text-center text-3xl my-7 font-semibold">Create a log</h1>
+        <h1 className="text-center text-3xl my-7 font-semibold">Create a post</h1>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <TextInput type='text' placeholder="Title" required id='title' className="flex-1" onChange={(e)=> setFormData({...formData,title:e.target.value})}></TextInput>
             <div className="flex flex-col gap-4 sm:flex-row justify-between">
@@ -184,12 +184,40 @@ export default function CreatePost() {
                     id='rating'
                     value={surfRating} 
                     min="0" 
-                    max="10" 
+                    max="100"  
                     onChange={handleRatingChange} 
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 range-slider"
                 />
                 <p className="text-center">{stokeLevel}</p>
             </div>
+            <style jsx="true">{`
+                input[type="range"].range-slider {
+                    -webkit-appearance: none;
+                    width: 100%;
+                    height: 8px;
+                    border-radius: 5px;
+                    background: linear-gradient(to right, #4caf50 0%, #4caf50 ${formData.rating}%, #d3d3d3 ${formData.rating}%, #d3d3d3 100%);
+                    outline: none;
+                    opacity: 0.7;
+                    transition: opacity .2s;
+                }
+                input[type="range"].range-slider::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    background: #4caf50;
+                    cursor: pointer;
+                }
+                input[type="range"].range-slider::-moz-range-thumb {
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    background: #4caf50;
+                    cursor: pointer;
+                }
+            `}</style>
             <div className="flex gap-4 items-center justify-between border-4 border-emerald-600 border-dotted p-3">
                 <FileInput type='file' accept='image/*' onChange={(e)=>setFile(e.target.files[0])}></FileInput>
                 <Button type='button' gradientDuoTone='cyanToBlue' size='sm' outline onClick={handleUploadImage} disabled={imageUploadProgress}>

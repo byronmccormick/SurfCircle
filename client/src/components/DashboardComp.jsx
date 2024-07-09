@@ -8,10 +8,10 @@ export default function DashboardComp() {
     const [comments, setComments] = useState([]);
     const [posts, setPosts] = useState([]);
     const [totalUsers, setTotalUsers] = useState(0);
-    const [totalPosts, setTotalPosts] = useState(0);
+    const [totalDuration, setTotalDuration] = useState(0);
     const [totalComments, setTotalComments] = useState(0);
     const [lastMonthUsers, setLastMonthUsers] = useState(0);
-    const [lastMonthPosts, setLastMonthPosts] = useState(0);
+    const [lastMonthDuration, setLastMonthDuration] = useState(0);
     const [lastMonthComments, setLastMonthComments] = useState(0);
     const {currentUser} = useSelector((state) => state.user)
     useEffect(()=>{
@@ -34,8 +34,8 @@ export default function DashboardComp() {
             const data = await res.json();
             if(res.ok){
                 setPosts(data.posts);
-                setTotalPosts(data.totalPosts);
-                setLastMonthPosts(data.lastMonthPosts);
+                setTotalDuration(data.totalDuration);
+                setLastMonthDuration(data.lastMonthDuration);
             }
            } catch (error) {
                 console.log(error.message);
@@ -98,15 +98,15 @@ export default function DashboardComp() {
             <div className='flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md'>
                 <div className='flex justify-between'>
                     <div>
-                        <h3 className='text-gray-500 text-md uppercase'>Total Posts</h3>
-                        <p className='text-2xl'>{totalPosts}</p>
+                        <h3 className='text-gray-500 text-md uppercase'>Hours surfed</h3>
+                        <p className='text-2xl'>{totalDuration}</p>
                     </div>
                     <HiDocumentText className='bg-lime-600 text-white rounded-full text-5xl p-3 shadow-lg'/>
                 </div>
                 <div className='flex gap-2 text-sm'>
                     <span className='text-green-500 flex items-center'>
                         <HiArrowNarrowUp/>
-                        {lastMonthPosts}
+                        {lastMonthDuration}
                     </span>
                     <div className='text-gray-500'>Last month</div>
                 </div>

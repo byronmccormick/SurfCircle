@@ -8,7 +8,7 @@ export default function PostCard({post}) {
             <div className="p-3 flex flex-col gap-2">
                 <p className="text-lg font-semibold line-clamp-2">{post.title}</p>
                 <span className="italic text-sm">{post.region}</span>
-                <Link className="z-10 group-hover:bottom-0 absolute bottom-[-200px] left-0 right-0 border border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2" to={`/post/${post.slug}`}>Read post</Link>
+                <span className="z-10 group-hover:bottom-0 absolute bottom-[-200px] left-0 right-0 border border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2" to={`/post/${post.slug}`}>Read post</span>
             </div>
          </Link>
     </div>

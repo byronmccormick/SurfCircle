@@ -1,4 +1,4 @@
-import { Button, FileInput, Select, TextInput, Alert } from "flowbite-react";
+import { Button, FileInput, Select, TextInput, Alert, Label, RangeSlider } from "flowbite-react";
 import { useEffect, useState } from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -13,9 +13,11 @@ export default function UpdatePost() {
     const [file, setFile] = useState(null);
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null);
-    const [formData, setFormData] = useState({});
-    const [publishError, setPublishError] = useState(null);
     const {postId} = useParams();
+    const [formData, setFormData] = useState({_id: postId});
+    const [publishError, setPublishError] = useState(null);
+    const [stokeLevel, setStokeLevel] = useState("");
+    const [surfRating, setSurfRating] = useState(0); 
     const navigate = useNavigate();
     const {currentUser} = useSelector((state)=> state.user)
 
@@ -98,19 +100,145 @@ export default function UpdatePost() {
             setPublishError('Something went wrong.')
         }
     };
+    const handleRatingChange = (e) => {
+        const value = parseInt(e.target.value);
+        setSurfRating(value);
+        updateStokeLevel(value);
+        setFormData({...formData,rating:e.target.value})
+    };
+    const updateStokeLevel = (rating) => {
+        if (rating >= 0 && rating <= 10) {
+          setStokeLevel("Never surfing again");
+        } else if (rating > 10 && rating < 30) {
+          setStokeLevel("Not impressed");
+        } else if (rating >= 30 && rating < 50) {
+          setStokeLevel("It's alright");
+        } else if (rating >= 50 && rating < 70) {
+          setStokeLevel("Pretty good");
+        } else if (rating >= 70 && rating < 80) {
+          setStokeLevel("Feeling great");
+        } else if (rating >= 80 && rating < 90) {
+          setStokeLevel("Super stoked");
+        } else if (rating >= 90 && rating <= 100) {
+          setStokeLevel("Epic!");
+        }
+      };      
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
         <h1 className="text-center text-3xl my-7 font-semibold">Update post</h1>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <TextInput value={formData.title} type='text' placeholder="Title" required id='title' className="flex-1" onChange={(e)=> setFormData({...formData,title:e.target.value})}></TextInput>
             <div className="flex flex-col gap-4 sm:flex-row justify-between">
-                <TextInput value={formData.title} type='text' placeholder="Title" required id='title' className="flex-1" onChange={(e)=> setFormData({...formData,title:e.target.value})}></TextInput>
-                <Select value={formData.category} onChange={(e)=> setFormData({...formData,category:e.target.value})}>
-                    <option value="uncategorized">Select a category</option>
-                    <option value="php">PHP</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="reactjs">React.js</option>
+                <Select value={formData.region} className="flex-1" onChange={(e)=> setFormData({...formData,region:e.target.value})}>
+                    <option value="unknown">Region...</option>
+                    <option value="northland">Northland</option>
+                    <option value="auckland">Auckland</option>
+                    <option value="waikato">Waikato</option>
+                    <option value="bay of plenty">Bay of Plenty</option>
+                    <option value="gisborne">Gisborne</option>
+                    <option value="hawkes bay">Hawke's Bay</option>
+                    <option value="taranaki">Taranaki</option>
+                    <option value="wellington">Wellington</option>
+                    <option value="nelson">Nelson</option>
+                    <option value="marlborough">Marlborough</option>
+                    <option value="westcost">Westcost</option>
+                    <option value="canterbury">Canterbury</option>
+                    <option value="southland">Southland</option>
+                </Select>
+                <TextInput value={formData.break} type='text' placeholder="Break" required id='break' className="flex-1" onChange={(e)=> setFormData({...formData,break:e.target.value})}></TextInput>
+            </div>
+            <div className="flex flex-col gap-4 md:flex-row justify-between">
+                <TextInput value={formData.reportedSwell} type='text' placeholder="Reported wave height (meters)" required id='reportedSwell' className="flex-1" onChange={(e)=> setFormData({...formData,reportedSwell:e.target.value})}></TextInput>
+                <TextInput value={formData.actualSwell} type='text' placeholder="Actual wave height (meters)" required id='actualSwell' className="flex-1" onChange={(e)=> setFormData({...formData,actualSwell:e.target.value})}></TextInput>
+            </div>
+            <div className="flex flex-col gap-4 sm:flex-row justify-between">
+                <Select value={formData.swellDirection} className="flex-1" onChange={(e)=> setFormData({...formData,swellDirection:e.target.value})}>
+                    <option value="unknown">Swell direction...</option>
+                    <option value="N">North</option>
+                    <option value="NE">Northeast</option>
+                    <option value="E">East</option>
+                    <option value="SE">Southeast</option>
+                    <option value="S">South</option>
+                    <option value="SW">Southwest</option>
+                    <option value="W">West</option>
+                    <option value="NW">Northwest</option>
+                </Select>
+                <TextInput value={formData.buoyData} type='text' placeholder="Buoy data (meters)" id='buoyData' className="flex-1" onChange={(e)=> setFormData({...formData,buoyData:e.target.value})}></TextInput>
+            </div>
+            <div className="flex flex-col gap-4 sm:flex-row">
+                <Select value={formData.reportedWind} className="flex-1" onChange={(e)=> setFormData({...formData,reportedWind:e.target.value})}>
+                    <option value="unknown">Reported wind...</option>
+                    <option value="onshore">Onshore</option>
+                    <option value="offshore">Offshore</option>
+                    <option value="cross">Cross</option>
+                </Select>
+                <Select value={formData.actualWind} className="flex-1" onChange={(e)=> setFormData({...formData,actualWind:e.target.value})}>
+                    <option value="unknown">Actual wind...</option>
+                    <option value="onshore">Onshore</option>
+                    <option value="offshore">Offshore</option>
+                    <option value="cross">Cross</option>
+                </Select>
+                <Select value={formData.tide} className="flex-1" onChange={(e)=> setFormData({...formData,tide:e.target.value})}>
+                    <option value="unknown">Tide...</option>
+                    <option value="high">High</option>
+                    <option value="mid">Mid</option>
+                    <option value="low">Low</option>
                 </Select>
             </div>
+            <div className="flex flex-col gap-4 sm:flex-row">
+                <Select value={formData.duration} className="flex-2" onChange={(e)=> setFormData({...formData,duration:e.target.value})}>
+                    <option value="unknown">Surf duration...</option>
+                    <option value="0.5">30 minutes</option>
+                    <option value="1">1 hour</option>
+                    <option value="1.5">1 hour 30 minutes</option>
+                    <option value="2">2 hours</option>
+                    <option value="2.5">2 hours 30 minutes</option>
+                    <option value="3">3 hours+</option>
+                    <option value="noodled">Noodled</option>
+                </Select>
+                <TextInput value={formData.forecast} type='text' placeholder="Forecast source" required id='forecast' className="flex-1" onChange={(e)=> setFormData({...formData,forecast:e.target.value})}></TextInput>
+            </div> 
+            <div className="flex flex-col gap-4 justify-between items-center">
+                <p className="text-center">Rate it</p>
+                <input 
+                    type="range" 
+                    id="rating"
+                    value={formData.rating} 
+                    min="0" 
+                    max="100" 
+                    onChange={handleRatingChange} 
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 range-slider"
+                />
+                <p className="text-center">{stokeLevel}</p>
+            </div>
+            <style jsx="true">{`
+                input[type="range"].range-slider {
+                    -webkit-appearance: none;
+                    width: 100%;
+                    height: 8px;
+                    border-radius: 5px;
+                    background: linear-gradient(to right, #4caf50 0%, #4caf50 ${formData.rating}%, #d3d3d3 ${formData.rating}%, #d3d3d3 100%);
+                    outline: none;
+                    opacity: 0.7;
+                    transition: opacity .2s;
+                }
+                input[type="range"].range-slider::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    background: #4caf50;
+                    cursor: pointer;
+                }
+                input[type="range"].range-slider::-moz-range-thumb {
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    background: #4caf50;
+                    cursor: pointer;
+                }
+            `}</style>
             <div className="flex gap-4 items-center justify-between border-4 border-emerald-600 border-dotted p-3">
                 <FileInput type='file' accept='image/*' onChange={(e)=>setFile(e.target.files[0])}></FileInput>
                 <Button type='button' gradientDuoTone='cyanToBlue' size='sm' outline onClick={handleUploadImage} disabled={imageUploadProgress}>
