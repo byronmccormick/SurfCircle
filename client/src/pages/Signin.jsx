@@ -47,7 +47,10 @@ export default function Signin() {
             SurfCircle
           </Link>
           <p className='text-sm mt-5'>
-            Welcome! Sign in with your email and password to get started. 
+            Welcome! Sign in with your email and password to get started.
+          </p>
+          <p className='text-sm mt-5'>
+          Just want to try it out? You can signin using demo@surfcircle.com | K8oz7hpA24Nox2
           </p>
         </div>
         <div className='flex-1'>
